@@ -21,7 +21,7 @@ def middle_crypto_pre():
 
     # 读取一个表，判断api_key 是不是在有效期内，有效的下单金额是多少
     p = []
-    with open("/root/middle_crypto_pre/base_information.csv", 'r', encoding="UTF-8") as fr:
+    with open("/root/middle_crypto/base_information.csv", 'r', encoding="UTF-8") as fr:
         reader = csv.reader(fr)
         for index, line in enumerate(reader):
             if index == 0:
@@ -48,7 +48,7 @@ def middle_crypto_pre():
             res_dict = {'value':'exit_date','today_price':0,'up_close_date':0,'up_start_price':0}
             ans_str = json.dumps(res_dict)
          # 试用期的api，不能超过200u
-        elif api_type == 'shiyong' and order_value >= 210:
+        elif api_type == 'shiyong' and int(order_value) >= 210:
             res_dict = {'value':'exit_value','today_price':0,'up_close_date':0,'up_start_price':0}
             ans_str = json.dumps(res_dict)
         else:
