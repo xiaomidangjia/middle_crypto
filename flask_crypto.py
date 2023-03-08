@@ -52,6 +52,7 @@ def middle_crypto_pre():
             res_dict = {'value':'exit_value','today_price':0,'up_close_date':0,'up_start_price':0}
             ans_str = json.dumps(res_dict)
         else:
+            print(type_,date,crypto)
             w = 0
             while  w == 0:
                 #调用接口  
@@ -69,6 +70,7 @@ def middle_crypto_pre():
                     today_price = api_res['today_price']
                     up_close_date = str(api_res['up_close_date'])[0:10]
                     up_start_price = float(api_res['up_start_price'])
+                    print(r_value,today_price,up_close_date,up_start_price)
                     w = 1
                 except:
                     w = 0
