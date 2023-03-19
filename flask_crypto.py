@@ -4,6 +4,7 @@
 import json
 import base64
 from flask import Flask, request
+import requests
 import numpy as np
 import pandas as pd
 import csv
@@ -18,6 +19,8 @@ def middle_crypto_pre():
     crypto = request.form.get('crypto')
     api_key_value = request.form.get('api_key')
     order_value = request.form.get('order_value')
+    ip_addr = request.remote_addr
+    print(ip_addr)
 
     # 读取一个表，判断api_key 是不是在有效期内，有效的下单金额是多少
     p = []
@@ -31,8 +34,9 @@ def middle_crypto_pre():
     res_data['api_key'] = res_data.iloc[:,0]
     res_data['end_date'] = res_data.iloc[:,1]
     res_data['api_type'] = res_data.iloc[:,3]
+    res_data['ip_addr'] = res_data.iloc[:,6]
 
-    api_key_judge = res_data[res_data.api_key==api_key_value]
+    api_key_judge = res_data[(res_data.api_key==api_key_value) & (res_data.ip_addr==ip_addr)]
 
     if len(api_key_judge) == 0:
         # 无效api，返回的都是不下单
@@ -49,6 +53,9 @@ def middle_crypto_pre():
             ans_str = json.dumps(res_dict)
          # 试用期的api，不能超过200u
         elif api_type == 'shiyong' and int(order_value) >= 210:
+            res_dict = {'value':'exit_value','today_price':0,'up_close_date':0,'up_start_price':0}
+            ans_str = json.dumps(res_dict)
+        elif api_type == 'zhengshi' and int(order_value) >= 20000:
             res_dict = {'value':'exit_value','today_price':0,'up_close_date':0,'up_start_price':0}
             ans_str = json.dumps(res_dict)
         else:
