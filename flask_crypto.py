@@ -77,12 +77,13 @@ def middle_crypto_pre():
                     today_price = api_res['today_price']
                     up_close_date = str(api_res['up_close_date'])[0:10]
                     up_start_price = float(api_res['up_start_price'])
-                    print(r_value,today_price,up_close_date,up_start_price)
+                    up_zuigao = int(api_res['zuigao'])
+                    #print(r_value,today_price,up_close_date,up_start_price)
                     w = 1
                 except:
                     w = 0
 
-            res_dict = {'value':r_value,'today_price':today_price,'up_close_date':up_close_date,'up_start_price':up_start_price}
+            res_dict = {'value':r_value,'today_price':today_price,'up_close_date':up_close_date,'up_start_price':up_start_price,'zuigao':up_zuigao}
             ans_str = json.dumps(res_dict)
 
     return ans_str
