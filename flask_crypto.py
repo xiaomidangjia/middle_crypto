@@ -52,7 +52,7 @@ def middle_crypto_pre():
             res_dict = {'value':'exit_date','today_price':0,'up_close_date':0,'up_start_price':0}
             ans_str = json.dumps(res_dict)
          # 试用期的api，不能超过200u
-        elif api_type == 'shiyong' and int(order_value) >= 5300:
+        elif api_type == 'shiyong' and int(order_value) >= 1100:
             res_dict = {'value':'exit_value','today_price':0,'up_close_date':0,'up_start_price':0}
             ans_str = json.dumps(res_dict)
         elif api_type == 'zhengshi' and int(order_value) >= 21000:
