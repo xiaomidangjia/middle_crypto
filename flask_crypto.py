@@ -40,7 +40,7 @@ def middle_crypto_pre():
 
     if len(api_key_judge) == 0:
         # 无效api，返回的都是不下单
-        res_dict = {'value':'no_api','today_price':0,'up_close_date':0,'up_start_price':0}
+        res_dict = {'value':'no_api','today_price':0,'up_close_date':0,'up_start_price':0,'zuigao':0}
         ans_str = json.dumps(res_dict)
     else:
         # 判断api是不是试用的，是不是在有效期
@@ -49,14 +49,14 @@ def middle_crypto_pre():
         end_date = api_key_judge['end_date'][0]
         # 已经超时，返回不下单
         if pd.to_datetime(date) > pd.to_datetime(end_date):
-            res_dict = {'value':'exit_date','today_price':0,'up_close_date':0,'up_start_price':0}
+            res_dict = {'value':'exit_date','today_price':0,'up_close_date':0,'up_start_price':0,'zuigao':0}
             ans_str = json.dumps(res_dict)
          # 试用期的api，不能超过200u
-        elif api_type == 'shiyong' and int(order_value) >= 220:
-            res_dict = {'value':'exit_value','today_price':0,'up_close_date':0,'up_start_price':0}
+        elif api_type == 'shiyong' and int(order_value) >= 2200:
+            res_dict = {'value':'exit_value','today_price':0,'up_close_date':0,'up_start_price':0,'zuigao':0}
             ans_str = json.dumps(res_dict)
         elif api_type == 'zhengshi' and int(order_value) >= 22000:
-            res_dict = {'value':'exit_value','today_price':0,'up_close_date':0,'up_start_price':0}
+            res_dict = {'value':'exit_value','today_price':0,'up_close_date':0,'up_start_price':0,'zuigao':0}
             ans_str = json.dumps(res_dict)
         else:
             print(type_,date,crypto)
